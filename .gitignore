@@ -1,0 +1,14 @@
+# Node modules
+node_modules/
+
+# Env file
+
+uploads/
+
+# Log files
+*.log
+
+# Editor/IDE cache
+.vscode/
+.DS_Store
+*.swp
