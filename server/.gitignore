@@ -1,8 +1,9 @@
 # Node modules
-server/node_modules/
+node_modules/
 
+# Env file
 
-server/uploads/
+uploads/
 
 # Log files
 *.log
