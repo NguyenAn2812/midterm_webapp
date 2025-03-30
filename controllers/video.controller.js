@@ -1,22 +1,27 @@
 const Video = require('../models/Video');
 
 // POST /api/videos
+
 const uploadVideo = async (req, res) => {
-  const { title, description, videoUrl, thumbnail } = req.body;
+  const { title, description } = req.body;
+  const videoPath = req.file ? `/uploads/videos/${req.file.filename}` : null;
+
+  if (!videoPath) {
+    return res.status(400).json({ message: 'Chưa gửi file video' });
+  }
 
   try {
     const newVideo = new Video({
       title,
       description,
-      videoUrl,
-      thumbnail,
-      uploadedBy: req.user.id 
+      videoUrl: videoPath,
+      uploadedBy: req.user.id
     });
 
-    const savedVideo = await newVideo.save();
-    res.status(201).json(savedVideo);
+    const saved = await newVideo.save();
+    res.status(201).json(saved);
   } catch (err) {
-    res.status(500).json({ message: 'Upload failed', error: err.message });
+    res.status(500).json({ message: 'Upload thất bại', error: err.message });
   }
 };
 // GET /api/videos/id

@@ -1,26 +1,21 @@
 const express = require('express');
 const router = express.Router();
+const verifyToken = require('../middleware/auth.middleware');
+const upload = require('../middleware/upload.middleware');
 const {
   uploadVideo,
-  getVideoById,
   getAllVideos,
+  getVideoById,
   toggleLike,
   getMyVideos
 } = require('../controllers/video.controller');
-const verifyToken = require('../middleware/auth.middleware');
+
+// Upload file video (FormData)
+router.post('/', verifyToken, upload.single('video'), uploadVideo);
 
 router.get('/my', verifyToken, getMyVideos);
-
-// Upload video
-router.post('/', verifyToken, uploadVideo);
-
-// Lấy danh sách tất cả video
 router.get('/', getAllVideos);
-
-router.patch('/:id/like', verifyToken, toggleLike);
-
-// Xem chi tiết video
 router.get('/:id', getVideoById);
-
+router.patch('/:id/like', verifyToken, toggleLike);
 
 module.exports = router;
