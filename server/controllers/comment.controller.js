@@ -13,11 +13,15 @@ const postComment = async (req, res) => {
       content
     });
 
+    // ✅ Populate thông tin user để gửi về frontend đầy đủ
+    await newComment.populate("user", "username email avatar");
+
     res.status(201).json(newComment);
   } catch (err) {
-    res.status(500).json({ message: 'Lỗi khi gửi bình luận', error: err.message });
+    res.status(500).json({ message: "Lỗi khi gửi bình luận", error: err.message });
   }
 };
+
 
 // GET /api/comments/:videoId
 const getComments = async (req, res) => {
@@ -25,7 +29,7 @@ const getComments = async (req, res) => {
 
   try {
     const comments = await Comment.find({ video: videoId })
-      .populate('user', 'username email')
+      .populate('user', 'username email avatar')
       .sort({ createdAt: -1 });
 
     res.json(comments);

@@ -25,14 +25,25 @@ const uploadVideo = async (req, res) => {
   }
 };
 // GET /api/videos/id
+const incrementView = async (req, res) => {
+  try {
+    const video = await Video.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { views: 1 } },
+      { new: true }
+    );
+    if (!video) return res.status(404).json({ message: "Video not found" });
+    res.json({ message: "View count increased" });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to update views", error: err.message });
+  }
+};
+
 const getVideoById = async (req, res) => {
     try {
       // Tăng view trước khi trả về
-      const video = await Video.findByIdAndUpdate(
-        req.params.id,
-        { $inc: { views: 1 } },
-        { new: true }
-      ).populate('uploadedBy', 'username email');
+      const video = await Video.findById(req.params.id)
+  .populate('uploadedBy', 'username email avatar');
   
       if (!video) return res.status(404).json({ message: 'Not found' });
   
@@ -54,11 +65,9 @@ const toggleLike = async (req, res) => {
       const hasLiked = video.likedBy.includes(userId);
   
       if (hasLiked) {
-        // Nếu đã like → unlike
         video.likedBy.pull(userId);
         video.likes -= 1;
       } else {
-        // Nếu chưa like → thêm like
         video.likedBy.push(userId);
         video.likes += 1;
       }
@@ -78,7 +87,7 @@ const toggleLike = async (req, res) => {
 const getAllVideos = async (req, res) => {
     try {
       const videos = await Video.find()
-        .populate('uploadedBy', 'username email')
+        .populate('uploadedBy', 'username email avatar')
         .sort({ createdAt: -1 }); "lasted"
   
       res.json(videos);
@@ -101,5 +110,6 @@ const getMyVideos = async (req, res) => {
     getVideoById,
     getAllVideos,
     toggleLike,
-    getMyVideos
+    getMyVideos,
+    incrementView
   };
