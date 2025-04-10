@@ -13,7 +13,7 @@ const WatchPage = () => {
     const [hasStartedTimer, setHasStartedTimer] = useState(false);
     const [isLiked, setIsLiked] = useState(false);
     const videoRef = useRef();
-    const API = import.meta.env.API_BASE_URL;
+    const API = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(() => {
         axios.get(`${API}/api/videos/${id}`)

@@ -52,6 +52,7 @@ const getMe = async (req, res) => {
     }
 };
 
+
 // PUT /api/users/me
 const updateMe = async (req, res) => {
     try {

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 
 const AccountPage = () => {
-    const API = import.meta.env.API_BASE_URL;
+    const API = import.meta.env.VITE_API_BASE_URL;
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");

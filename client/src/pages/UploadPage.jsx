@@ -10,7 +10,7 @@ const UploadPage = () => {
     const [isUploading, setIsUploading] = useState(false);
     const fileInputRef = useRef(null);
     const navigate = useNavigate();
-    const API = import.meta.env.API_BASE_URL;
+    const API = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(() => {
         const token = localStorage.getItem("token");

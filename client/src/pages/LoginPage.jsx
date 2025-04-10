@@ -7,7 +7,7 @@ import { useUser } from "../context/UserContext";
 const LoginPage = () => {
     const navigate = useNavigate();
     const { login } = useUser();
-    const API = import.meta.env.API_BASE_URL;
+    const API = import.meta.env.VITE_API_BASE_URL;
 
     const handleLogin = async (data) => {
         try {

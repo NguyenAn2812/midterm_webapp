@@ -5,7 +5,7 @@ import VideoCard from "../components/VideoCard";
 import { Icon } from "@iconify/react";
 
 const ChannelPage = () => {
-    const API = import.meta.env.API_BASE_URL;
+    const API = import.meta.env.VITE_API_BASE_URL;
 
     const { id } = useParams();
     const [user, setUser] = useState(null);

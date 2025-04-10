@@ -3,7 +3,7 @@ import axios from "axios";
 import { Icon } from "@iconify/react";
 import { useUser } from "../context/UserContext";
 const CommentsContainer = ({ videoId }) => {
-    const API = import.meta.env.API_BASE_URL;
+    const API = import.meta.env.VITE_API_BASE_URL;
     const { user } = useUser();
 
     const [comments, setComments] = useState([]);

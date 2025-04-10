@@ -89,7 +89,7 @@ const getAllVideos = async (req, res) => {
             .sort({ createdAt: -1 }); "lasted"
         res.json(videos);
     } catch (err) {
-        res.status(500).json({ message: 'Lỗi khi lấy danh sách video', error: err.message });
+        res.status(500).json({ message: 'Error', error: err.message });
     }
 };
 const getMyVideos = async (req, res) => {
@@ -98,7 +98,7 @@ const getMyVideos = async (req, res) => {
             .sort({ createdAt: -1 });
         res.json(videos);
     } catch (err) {
-        res.status(500).json({ message: 'Lỗi khi lấy video cá nhân', error: err.message });
+        res.status(500).json({ message: 'Erorr', error: err.message });
     }
 };
   module.exports = {

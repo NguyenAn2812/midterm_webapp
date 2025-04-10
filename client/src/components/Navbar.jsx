@@ -5,13 +5,15 @@ import { Icon } from "@iconify/react";
 
 const Navbar = () => {
     const { user, logout } = useUser();
-    const API = import.meta.env.API_BASE_URL;
+    const API = import.meta.env.VITE_API_BASE_URL;
 
     const navigate = useNavigate();
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const menuRef = useRef();
     
-    
+    console.log("user.avatar:", user?.avatar);
+    console.log("USER IN NAVBAR:", user);
+
       
     useEffect(() => {
     const handler = (e) => {
@@ -39,41 +41,45 @@ const Navbar = () => {
         <div className="flex items-center space-x-4 relative" ref={menuRef}>
             {user ? (
             <>
-                <Link
-                    to="/upload"
-                    className="w-full flex items-center justify-center px-3 py-2 rounded-full font-medium transition-colors duration-200 border border-white text-white hover:bg-white hover:text-black"
+            <Link
+                to="/upload"
+                className="w-full flex items-center justify-center px-3 py-2 rounded-full font-medium transition-colors duration-200 border border-white text-white hover:bg-white hover:text-black"
                 >
-                    Upload
+                Upload
                 </Link>
-                <button
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className="flex items-center space-x-1 text-sm font-medium text-white hover:text-gray-300"
+            <button
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="flex items-center space-x-1 text-sm font-medium text-white hover:text-gray-300"
                 >
-                    <img
-                        src={`${API}${user.avatar || "/uploads/avatars/default.png"}`}
-                        alt="avatar"
-                        className="w-8 h-8 rounded-full object-cover"
-                    />
-                    <span>{user.username}</span>
-                    <Icon icon="ic:round-arrow-drop-down" className="text-3xl" />
-                </button>
+                <img
+                    src={
+                        user.avatar
+                        ? `${API}${user.avatar}`
+                        : `${API}/uploads/avatars/default.png`
+                    }
+                    alt="avatar"
+                    className="w-8 h-8 rounded-full object-cover"
+                />
+                <span>{user.username}</span>
+                <Icon icon="ic:round-arrow-drop-down" className="text-3xl" />
+            </button>
 
-                {dropdownOpen && (
-                    <div className="absolute right-0 top-12 bg-[#181818] text-white shadow-md rounded border border-[#303030] w-40 z-50">
-                        <Link to="/my-videos" className="block px-4 py-2 hover:bg-[#2a2a2a]">
-                            <Icon icon="mdi:filmstrip" className="inline-block mr-2" /> My Videos
-                        </Link>
-                        <Link to="/account" className="block px-4 py-2 hover:bg-[#2a2a2a]">
-                            <Icon icon="mdi:account-edit" className="inline-block mr-2" /> Edit account
-                        </Link>
-                        <button
-                            onClick={handleLogout}
-                            className="w-full text-left px-4 py-2 hover:bg-[#2a2a2a]"
-                        >
-                            <Icon icon="mdi:logout" className="inline-block mr-2" /> Logout
-                        </button>
-                    </div>
-                )}
+            {dropdownOpen && (
+                <div className="absolute right-0 top-12 bg-[#181818] text-white shadow-md rounded border border-[#303030] w-40 z-50">
+                    <Link to="/my-videos" className="block px-4 py-2 hover:bg-[#2a2a2a]">
+                        <Icon icon="mdi:filmstrip" className="inline-block mr-2" /> My Videos
+                    </Link>
+                    <Link to="/account" className="block px-4 py-2 hover:bg-[#2a2a2a]">
+                        <Icon icon="mdi:account-edit" className="inline-block mr-2" /> Edit account
+                    </Link>
+                    <button
+                        onClick={handleLogout}
+                        className="w-full text-left px-4 py-2 hover:bg-[#2a2a2a]"
+                    >
+                        <Icon icon="mdi:logout" className="inline-block mr-2" /> Logout
+                    </button>
+                </div>
+            )}
           </>
         ) : (
           <>

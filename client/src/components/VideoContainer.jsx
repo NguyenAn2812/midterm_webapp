@@ -4,7 +4,7 @@ import VideoCard from "./VideoCard";
 
 const VideoContainer = () => {
     const [videos, setVideos] = useState([]);
-    const API = import.meta.env.API_BASE_URL;
+    const API = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(() => {
         axios

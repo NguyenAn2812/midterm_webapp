@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios"; 
 const UserContext = createContext();
-const API = import.meta.env.API_BASE_URL;
+const API = import.meta.env.VITE_API_BASE_URL;
 export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 

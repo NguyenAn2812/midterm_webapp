@@ -5,7 +5,7 @@ import AuthForm from "../components/AuthForm";
 
 const RegisterPage = () => {
     const navigate = useNavigate();
-    const API = import.meta.env.API_BASE_URL;
+    const API = import.meta.env.VITE_API_BASE_URL;
     const handleRegister = async (data) => {
         try {
             await axios.post(`${API}/api/auth/register`, data);

@@ -5,7 +5,7 @@ import VideoCard from "../components/VideoCard";
 const MyVideosPage = () => {
     const [videos, setVideos] = useState([]);
     const [user, setUser] = useState(null);
-    const API = import.meta.env.API_BASE_URL;
+    const API = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(() => {
         const token = localStorage.getItem("token");
